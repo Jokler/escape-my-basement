@@ -5,14 +5,16 @@
 
 mod asset_tracking;
 mod audio;
-mod game;
 #[cfg(feature = "dev")]
 mod dev_tools;
+mod game;
 mod menus;
 mod screens;
 mod theme;
 
 use bevy::{asset::AssetMetaCheck, prelude::*};
+
+use crate::game::player::Player;
 
 fn main() -> AppExit {
     App::new().add_plugins(AppPlugin).run()
@@ -40,7 +42,8 @@ impl Plugin for AppPlugin {
                     }
                     .into(),
                     ..default()
-                }),
+                })
+                .set(ImagePlugin::default_nearest()),
         );
 
         // Add other plugins.
@@ -97,5 +100,26 @@ struct Pause(pub bool);
 struct PausableSystems;
 
 fn spawn_camera(mut commands: Commands) {
-    commands.spawn((Name::new("Camera"), Camera2d));
+    commands.spawn((
+        Name::new("Camera"),
+        Camera2d,
+        Transform::from_scale(Vec3::splat(0.3)),
+    ));
+}
+
+const CAMERA_DECAY_RATE: f32 = 2.;
+
+fn follow_camera(
+    mut camera: Single<&mut Transform, With<Camera2d>>,
+    player: Single<&GlobalTransform, (With<Player>, Without<Camera2d>)>,
+    time: Res<Time>,
+) {
+    let Vec3 { x, y, .. } = player.translation();
+    let direction = Vec3::new(x, y, camera.translation.z);
+
+    // Applies a smooth effect to camera movement using stable interpolation
+    // between the camera position and the player position on the x and y axes.
+    camera
+        .translation
+        .smooth_nudge(&direction, CAMERA_DECAY_RATE, time.delta_secs());
 }

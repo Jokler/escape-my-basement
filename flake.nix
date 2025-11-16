@@ -29,7 +29,7 @@
             buildInputs =
               [
                 # Rust dependencies
-                (rust-bin.stable.latest.default.override {
+                (rust-bin.nightly.latest.default.override {
                   extensions = [ "rust-src" ];
                   targets = [ "wasm32-unknown-unknown" ];
                 })
@@ -39,11 +39,14 @@
                 rustfmt
                 clippy
                 bacon
+                mold
               ]
               ++ lib.optionals (lib.strings.hasInfix "linux" system) [
                 # for Linux
                 # Audio (Linux only)
-                alsa-lib
+                (alsa-lib-with-plugins.override {
+                  plugins = [ alsa-plugins pipewire ];
+                })
                 # Cross Platform 3D Graphics API
                 vulkan-loader
                 # For debugging around vulkan
