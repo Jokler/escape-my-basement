@@ -1,11 +1,13 @@
 //! The pause menu.
 
+use avian2d::prelude::*;
 use bevy::{input::common_conditions::input_just_pressed, prelude::*};
 
 use crate::{menus::Menu, screens::Screen, theme::widget};
 
 pub(super) fn plugin(app: &mut App) {
-    app.add_systems(OnEnter(Menu::Pause), spawn_pause_menu);
+    app.add_systems(OnEnter(Menu::Pause), (spawn_pause_menu, pause_physics));
+    app.add_systems(OnExit(Menu::Pause), resume_physics);
     app.add_systems(
         Update,
         go_back.run_if(in_state(Menu::Pause).and(input_just_pressed(KeyCode::Escape))),
@@ -24,6 +26,14 @@ fn spawn_pause_menu(mut commands: Commands) {
             widget::button("Quit to title", quit_to_title),
         ],
     ));
+}
+
+fn pause_physics(mut time: ResMut<Time<Physics>>) {
+    time.pause();
+}
+
+fn resume_physics(mut time: ResMut<Time<Physics>>) {
+    time.unpause();
 }
 
 fn open_settings_menu(_: On<Pointer<Click>>, mut next_menu: ResMut<NextState<Menu>>) {
