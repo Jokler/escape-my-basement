@@ -1,5 +1,5 @@
 [package]
-name = "my_game"
+name = "escape-my-basement"
 authors = ["Jokler <github@jokler.xyz>"]
 version = "0.1.0"
 edition = "2024"

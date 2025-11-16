@@ -33,8 +33,8 @@ fn spawn_credits_menu(mut commands: Commands) {
 fn created_by() -> impl Bundle {
     grid(vec![
         ["Jokler", "Everything"],
-        ["masha", "Help with the initial idea"],
-        ["Jarle", "Picked sound effects"],
+        ["Jarle", "Sound Effects, Ideas & Basement"],
+        ["masha", "Initial Brainstorming"],
     ])
 }
 
@@ -42,6 +42,7 @@ fn assets() -> impl Bundle {
     grid(vec![
         ["Platformer Asset Pack", "o_lobster"],
         ["Button SFX", "CC0 by Jaszunio15"],
+        ["Game Sounds", "Youtube"],
     ])
 }
 
