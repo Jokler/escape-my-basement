@@ -8,7 +8,7 @@ use bevy_ecs_ldtk::{
     assets::LdtkProject, ldtk::LayerInstance,
 };
 
-use crate::{game::player::Player, menus::Menu};
+use crate::{game::player::Player, screens::Screen};
 
 pub fn plugin(app: &mut App) {
     app.add_systems(Update, spawn_door_sensor)
@@ -27,7 +27,7 @@ fn on_player_entered_door(
     event: On<CollisionStart>,
     player_query: Query<&Player>,
     level_selection: ResMut<LevelSelection>,
-    mut next_menu: ResMut<NextState<Menu>>,
+    mut next_screen: ResMut<NextState<Screen>>,
 ) {
     // `colider1` and `body1` refer to the event target and its body.
     // `collider2` and `body2` refer to the other collider and its body.
@@ -42,7 +42,7 @@ fn on_player_entered_door(
         indices.level += 1;
 
         if indices.level > 4 {
-            next_menu.set(Menu::Won);
+            next_screen.set(Screen::Victory);
         }
     }
 }

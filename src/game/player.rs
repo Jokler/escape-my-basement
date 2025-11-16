@@ -63,10 +63,13 @@ fn on_spawn_player(
     mut commands: Commands,
     player_assets: Res<PlayerAssets>,
     mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>,
+    players: Query<(), With<Player>>,
 ) {
-    commands.entity(event.event().0).with_children(|p| {
-        p.spawn(player(&player_assets, &mut texture_atlas_layouts));
-    });
+    if players.is_empty() {
+        commands.entity(event.event().0).with_children(|p| {
+            p.spawn(player(&player_assets, &mut texture_atlas_layouts));
+        });
+    }
 }
 
 /// The player character.
@@ -130,7 +133,7 @@ pub fn player(
         // The player character needs to be configured as a dynamic rigid body of the physics
         // engine.
         RigidBody::Dynamic,
-        Collider::rectangle(8.0, 8.0),
+        Collider::round_rectangle(8.0, 8.0, 1.0),
         // This is Tnua's interface component.
         TnuaController::default(),
         // A sensor shape is not strictly necessary, but without it we'll get weird results.
@@ -164,10 +167,10 @@ fn apply_controls(
 
     let mut direction = Vec3::ZERO;
 
-    if keyboard.pressed(KeyCode::KeyR) {
+    if keyboard.pressed(KeyCode::KeyR) || keyboard.pressed(KeyCode::KeyA) {
         direction -= Vec3::X;
     }
-    if keyboard.pressed(KeyCode::KeyT) {
+    if keyboard.pressed(KeyCode::KeyT) || keyboard.pressed(KeyCode::KeyD) {
         direction += Vec3::X;
     }
 

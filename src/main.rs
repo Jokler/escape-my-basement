@@ -107,7 +107,7 @@ fn spawn_camera(mut commands: Commands) {
     ));
 }
 
-const CAMERA_DECAY_RATE: f32 = 2.;
+const CAMERA_DECAY_RATE: f32 = 4.;
 
 fn follow_camera(
     mut camera: Single<&mut Transform, With<Camera2d>>,
