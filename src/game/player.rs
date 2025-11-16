@@ -63,7 +63,7 @@ fn on_spawn_player(
     mut commands: Commands,
     player_assets: Res<PlayerAssets>,
     mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>,
-    players: Query<(), With<Player>>,
+    players: Query<(), (With<Player>, Without<Dead>)>,
 ) {
     if players.is_empty() {
         commands.entity(event.event().0).with_children(|p| {
@@ -199,7 +199,7 @@ fn apply_controls(
     if keyboard.pressed(KeyCode::Space) {
         controller.action(TnuaBuiltinJump {
             // The height is the only mandatory field of the jump button.
-            height: 30.0,
+            height: 35.0,
             // `TnuaBuiltinJump` also has customization fields with sensible defaults.
             ..Default::default()
         });
