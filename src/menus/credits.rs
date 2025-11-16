@@ -35,6 +35,11 @@ fn created_by() -> impl Bundle {
         ["Jokler", "Everything"],
         ["Jarle", "Sound Effects, Ideas & Basement"],
         ["masha", "Initial Brainstorming"],
+        ["APH, tmtu and kilmanio", "Major Distractions"],
+        [
+            "Yuki, Claire and zealsprince",
+            "Took a few hours of my time",
+        ],
     ])
 }
 
