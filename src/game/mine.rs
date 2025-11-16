@@ -7,11 +7,10 @@ use bevy::{
     prelude::*,
 };
 use bevy_ecs_ldtk::{LdtkEntity, app::LdtkEntityAppExt};
-use bevy_tnua::prelude::TnuaController;
 use rand::seq::IndexedRandom;
 
 use crate::{
-    AppSystems, PausableSystems,
+    AppSystems,
     asset_tracking::LoadResource,
     audio::sound_effect,
     game::{

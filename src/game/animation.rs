@@ -10,7 +10,6 @@ use bevy_tnua::{
     builtins::TnuaBuiltinJumpState,
     prelude::{TnuaBuiltinJump, TnuaBuiltinWalk, TnuaController},
 };
-use rand::prelude::*;
 use std::time::Duration;
 
 use crate::{

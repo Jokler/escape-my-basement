@@ -3,7 +3,6 @@
 use std::time::Duration;
 
 use bevy::{input::common_conditions::input_just_pressed, prelude::*};
-use bevy_ecs_ldtk::{LdtkProjectHandle, Respawn};
 
 use crate::{
     game::player::{PlayerSpawn, SpawnPlayer},

@@ -1,6 +1,4 @@
-use avian2d::prelude::{
-    Collider, CollisionEventsEnabled, CollisionStart, Friction, RigidBody, Sensor,
-};
+use avian2d::prelude::{Collider, CollisionEventsEnabled, CollisionStart, RigidBody, Sensor};
 use bevy::{
     platform::collections::{HashMap, HashSet},
     prelude::*,

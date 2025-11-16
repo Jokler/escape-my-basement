@@ -1,7 +1,4 @@
-use avian2d::{
-    PhysicsPlugins,
-    prelude::{Gravity, PhysicsDebugPlugin},
-};
+use avian2d::{PhysicsPlugins, prelude::Gravity};
 use bevy::{
     app::{App, FixedUpdate},
     math::Vec2,

@@ -3,10 +3,7 @@ use bevy::{
     ecs::{lifecycle::HookContext, world::DeferredWorld},
     prelude::*,
 };
-use bevy_ecs_ldtk::{
-    EntityInstance, LdtkEntity, app::LdtkEntityAppExt, ldtk::FieldValue, prelude::LdtkFields,
-};
-use bevy_tnua::prelude::TnuaController;
+use bevy_ecs_ldtk::{EntityInstance, LdtkEntity, app::LdtkEntityAppExt, prelude::LdtkFields};
 
 use crate::{
     game::{
